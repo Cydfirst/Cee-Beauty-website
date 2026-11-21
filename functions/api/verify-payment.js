@@ -1,0 +1,23 @@
+const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json','cache-control':'no-store'}});
+
+export async function onRequestGet({request,env}){
+  if(!env.DB||!env.PAYSTACK_SECRET_KEY)return json({error:'Payment verification is not configured.'},503);
+
+  const ref=new URL(request.url).searchParams.get('reference');
+  if(!ref)return json({error:'Missing payment reference.'},400);
+
+  const r=await fetch('https://api.paystack.co/transaction/verify/'+encodeURIComponent(ref),{
+    headers:{Authorization:'Bearer '+env.PAYSTACK_SECRET_KEY}
+  });
+
+  const v=await r.json();
+  if(!r.ok||!v.status||v.data.status!=='success')return json({paid:false,status:v.data?.status||'pending'},200);
+
+  const order=await env.DB.prepare('SELECT id,amount_kobo,order_number FROM orders WHERE payment_reference=?').bind(ref).first();
+
+  if(!order||Number(v.data.amount)!==Number(order.amount_kobo)||v.data.currency!=='NGN')return json({error:'Payment details do not match this order.'},400);
+
+  await env.DB.prepare("UPDATE orders SET payment_status='paid',fulfilment_status='payment_confirmed',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
+
+  return json({paid:true,order_number:order.order_number});
+}
