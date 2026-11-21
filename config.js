@@ -1,1 +1,0 @@
-export async function onRequestGet({env}){const ready=!!(env.DB&&env.PAYSTACK_SECRET_KEY);return new Response(JSON.stringify({ready}),{headers:{'content-type':'application/json','cache-control':'no-store'}});}
