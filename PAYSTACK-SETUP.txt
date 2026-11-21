@@ -1,0 +1,18 @@
+CEE BEAUTY — PAYSTACK CONNECTION CHECKLIST
+
+This project includes Cloudflare Pages Functions endpoints for transaction initialization, Paystack webhook verification and server-side payment verification. The checkout button remains disabled until the Cloudflare backend is deployed and configured. This is intentional: do not accept payments through a static-only checkout.
+
+1. Keep this website in the existing Cloudflare Pages project. Deploy this project using a Git-connected Pages deployment or Wrangler; a drag-and-drop static upload does not deploy the functions folder.
+2. In Cloudflare Pages > your existing project > Settings > Functions, create a D1 database binding named DB and point it to the D1 database created for this shop.
+3. Run schema.sql against that D1 database.
+4. In Cloudflare Pages > Settings > Variables and Secrets, add PAYSTACK_SECRET_KEY as an ENCRYPTED secret. Also add PAYSTACK_WEBHOOK_SECRET as an encrypted secret if your Paystack dashboard provides the newer webhook signing secret (starts with whsec_); the webhook endpoint supports both the newer signed header and the legacy signature. Copy the secret key from Paystack Dashboard > Settings > API Keys & Webhooks. Keep the webhook signing secret separate from the API secret. Use the LIVE secret key only after test-mode checks; never paste it into chat, HTML, JavaScript, GitHub or this ZIP.
+5. In Paystack Dashboard > Settings > API Keys & Webhooks, set the webhook URL to https://YOUR-EXISTING-SITE-DOMAIN/api/paystack-webhook. Use the exact existing Cee Beauty site domain.
+6. Confirm the Paystack callback/return page and test payment flow using Paystack test keys first. Only after successful verification should you add the live key.
+7. Check the Paystack test checkout to confirm the customer-facing fee pass-through is shown as expected. Do not assume the dashboard setting was applied until you see it at checkout.
+
+IMPORTANT CURRENT LIMITATIONS
+- Direct catalogue IDs/prices must be checked against the final visible catalogue before enabling payment. The price map is generated from this version of shop.js.
+- Email notifications, order tracking page, secure owner admin dashboard and order status management are not implemented in this package yet.
+- Product photo matching is partial: only exact matches that could be verified are shown. No AI images or generic substitutes are used. Other product cards intentionally show no image rather than a wrong photo.
+- Delivery fees are not calculated; they must be confirmed before collecting a final total.
+- Do not deploy to the live site until the D1 binding, Paystack secret, webhook and test transaction are all verified.

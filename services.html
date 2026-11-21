@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#171316">
+<meta name="description" content="Explore Cee Beauty Aesthetics services and request an appointment in Lekki, Lagos.">
+<title>Services & Booking | Cee Beauty Aesthetics</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="services-page">
+<header class="site-header">
+<a class="brand brand-wordmark" href="index.html#home" aria-label="Cee Beauty Aesthetics home"><span class="brand-name">Cee Beauty <small>AESTHETICS</small></span></a>
+<button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">MENU ☰</button>
+<nav id="navMenu" aria-label="Main menu"><a href="shop.html">Product shop</a><a href="index.html#home">Home</a><a href="services.html" aria-current="page">Our services</a><a href="studio-rental.html">Studio rental</a><a href="index.html#reviews">Reviews</a><a href="index.html#contact">Contact</a></nav>
+</header>
+<main>
+<section class="services-page-hero">
+<div class="services-page-hero-copy"><p class="eyebrow">THE CEE BEAUTY EXPERIENCE</p><h1>Your beauty moment<br><em>starts here.</em></h1><p>Explore our treatments, choose what you'd love, and send us your preferred appointment date and time.</p><a class="button button-pink" href="#booking">Request an appointment ↓</a></div>
+<div class="services-page-hero-photo"><img src="lash-client-1.jpeg" alt="Cee Beauty client wearing a finished lash set"></div>
+</section>
+<section class="service-categories section-pad" aria-labelledby="serviceCategoriesTitle">
+<div class="section-heading"><div><p class="eyebrow">EXPLORE THE MENU</p><h2 id="serviceCategoriesTitle">Our services</h2></div><p>Select a category to view the treatments available. Prices are shared privately during your enquiry.</p></div>
+<div class="service-category-grid" id="serviceCategoryGrid">
+<article class="service-category-card"><span class="category-icon">✧</span><h3>Lash Extension Services</h3><p>Classic, hybrid, volume, mega volume, refills and removal.</p><button type="button" class="text-link category-select" data-category="Lash Extension Services">Explore &amp; book ↗</button></article>
+<article class="service-category-card"><span class="category-icon">⌁</span><h3>Brow Services</h3><p>Brow tinting, nanoshading, nano-blading, microblading and removal.</p><button type="button" class="text-link category-select" data-category="Brow Services">Explore &amp; book ↗</button></article>
+<article class="service-category-card"><span class="category-icon">❋</span><h3>Waxing Services</h3><p>Facial and body waxing, from individual areas to full-body options.</p><button type="button" class="text-link category-select" data-category="Waxing Services">Explore &amp; book ↗</button></article>
+<article class="service-category-card"><span class="category-icon">☼</span><h3>Massage Services</h3><p>Relaxation and therapeutic massage options.</p><button type="button" class="text-link category-select" data-category="Massage Services">Explore &amp; book ↗</button></article>
+<article class="service-category-card"><span class="category-icon">♡</span><h3>Manicure &amp; Pedicure</h3><p>Neat, polished care for hands and feet.</p><button type="button" class="text-link category-select" data-category="Manicure & Pedicure">Explore &amp; book ↗</button></article>
+<article class="service-category-card"><span class="category-icon">✦</span><h3>Skin &amp; Removal Services</h3><p>Enquire about our available skin and removal treatments.</p><button type="button" class="text-link category-select" data-category="Skin & Removal Services">Explore &amp; book ↗</button></article>
+<article class="service-category-card"><span class="category-icon">◌</span><h3>Makeup Services</h3><p>Bridal, studio and home-service makeup enquiries.</p><button type="button" class="text-link category-select" data-category="Makeup Services">Explore &amp; book ↗</button></article>
+</div>
+</section>
+<section class="booking-section section-pad" id="booking">
+<div class="booking-intro"><p class="eyebrow">LET'S PLAN YOUR VISIT</p><h2>Request an<br><em>appointment.</em></h2><p>Choose your preferred date and time. WhatsApp is available as a booking-request backup; automatic slot confirmation will be activated once the live availability calendar is connected.</p><div class="booking-hours"><strong>Studio hours</strong><span>Monday–Saturday · 10:00 am–7:00 pm</span><span>Sunday · Closed</span></div></div>
+<form class="booking-form" id="bookingForm">
+<div class="booking-form-heading"><h3>Appointment details</h3><p>All fields marked * are required.</p></div>
+<label for="bookingName">Full name *</label><input id="bookingName" name="name" type="text" autocomplete="name" placeholder="Your full name" required>
+<label for="bookingPhone">Phone / WhatsApp number *</label><input id="bookingPhone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" required>
+<label for="bookingCategory">Service category *</label><select id="bookingCategory" name="category" required><option value="">Choose a category</option><option>Lash Extension Services</option><option>Brow Services</option><option>Waxing Services</option><option>Massage Services</option><option>Manicure &amp; Pedicure</option><option>Skin &amp; Removal Services</option><option>Makeup Services</option></select>
+<label for="bookingService">Treatment *</label><select id="bookingService" name="service" required disabled><option value="">Choose a category first</option></select>
+<div class="booking-date-time"><div><label for="bookingDate">Preferred date *</label><input id="bookingDate" name="date" type="date" required></div><div><label for="bookingTime">Preferred time *</label><select id="bookingTime" name="time" required><option value="">Choose a time</option><option>10:00 am</option><option>11:00 am</option><option>12:00 pm</option><option>1:00 pm</option><option>2:00 pm</option><option>3:00 pm</option><option>4:00 pm</option><option>5:00 pm</option><option>6:00 pm</option></select></div></div>
+<label for="bookingNotes">Additional notes <span>(optional)</span></label><textarea id="bookingNotes" name="notes" rows="3" placeholder="Anything you'd like us to know?"></textarea>
+<button class="button button-dark booking-submit" type="submit">Send appointment request on WhatsApp ↗</button>
+<p class="booking-disclaimer">WhatsApp requests are not confirmed bookings. Automatic confirmation requires the live appointment calendar to be connected and configured. Until then, your appointment is confirmed only after Cee Beauty replies and confirms the time.</p>
+</form>
+</section>
+<section class="booking-bottom section-pad"><p class="eyebrow">NEED HELP CHOOSING?</p><h2>We're happy to help.</h2><p>Message us if you'd like guidance before selecting a treatment.</p><a class="button button-pink" href="https://wa.me/2349167632465" target="_blank" rel="noopener">Chat with Cee Beauty ↗</a></section>
+</main>
+<footer class="site-footer"><a class="brand brand-wordmark footer-brand" href="index.html#home"><span class="brand-name">Cee Beauty <small>AESTHETICS</small></span></a><p>Shop 16, Lake Plaza, Igboefon, Lekki, Lagos.</p><p>© <span id="year"></span> Cee Beauty Aesthetics</p></footer>
+<script src="script.js"></script>
+</body></html>
