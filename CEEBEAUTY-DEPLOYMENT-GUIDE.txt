@@ -1,0 +1,50 @@
+CEE BEAUTY AESTHETICS — PREVIEW WEBSITE PACKAGE
+
+IMPORTANT: This is a TEST/PREVIEW package. Do not upload it to the production `main` branch. Do not change or reuse the live database for testing. The gift-box photo included is the unbranded red velvet and gold gift arrangement supplied/selected by the owner; no Cee Beauty logo has been added.
+
+WHAT IS INCLUDED
+- Updated customer website, service pages and shop
+- Three rotating “Shop directly with us” images: the two skincare images plus cee-shop-gift-box.jpg
+- The Cee Shop admin pages and Cloudflare Pages Functions
+- D1 schema and catalogue seed (103 products, 13 categories)
+- Paystack test-mode support as well as live-mode support
+
+SAFE PREVIEW SETUP
+1. Keep the existing Cloudflare Pages project `Cee-Beauty-Aesthetics` and its production branch `main` unchanged.
+2. Use the separate GitHub branch `cee-beauty-preview` for this update.
+3. Create a SEPARATE Cloudflare Pages project for preview, connected to repository `Cydfirst/Cee-Beauty-website`, with production branch set to `cee-beauty-preview`. Name the new Pages project `cee-beauty-preview` if available. This avoids relying on production bindings in the existing Pages project.
+4. In the NEW preview Pages project only, add a D1 binding named `DB` and select the database `cee-beauty-orders-preview`.
+5. Apply `schema.sql` and then `seed-catalogue.sql` to `cee-beauty-orders-preview` only. Never run these against `cee-beauty-orders` during preview setup.
+6. Create a separate R2 bucket for preview product photos and bind it in the NEW preview Pages project as `PRODUCT_IMAGES`.
+7. Add preview-only environment variables/secrets to the NEW preview Pages project:
+   - ADMIN_PASSWORD: a new strong preview-only password
+   - ADMIN_SESSION_SECRET: a random secret at least 32 bytes long
+   - PAYSTACK_SECRET_KEY: Paystack TEST secret key (starts with sk_test_)
+   - RESEND_API_KEY, EMAIL_FROM, OWNER_NOTIFICATION_EMAIL: optional; configure only if email testing is wanted
+8. Deploy the preview branch and test the preview URL. Do not merge to `main` and do not add live Paystack credentials yet.
+
+TEST CHECKLIST
+- /api/config should show ready:true, mode:"test", db:true, schema:true after the preview D1 schema and test key are configured.
+- Test admin login at /admin.html.
+- Add/edit/hide a product and create a category.
+- Upload a product image (requires the preview R2 binding).
+- Add products to cart and complete a Paystack TEST transaction.
+- Verify order tracking, payment confirmation and webhook processing.
+- Submit a service appointment; verify that massage forces Home service and requires an address.
+- Verify overlapping confirmed appointments are rejected.
+- Check that the shop spotlight rotates among all three images, including cee-shop-gift-box.jpg.
+
+LIVE RELEASE — ONLY AFTER PREVIEW PASSES
+- Back up the live D1 database before any schema changes.
+- Configure production R2, admin secrets, verified email sender and Paystack LIVE secret in the original production Pages project.
+- Apply schema/seed to the production database only after reviewing existing data and migration effects.
+- Configure Paystack webhook at https://ceebeautyaesthetics.com.ng/api/paystack-webhook.
+- Test a small real payment only with the owner's explicit approval.
+- Merge/copy the approved code to `main` only after all preview tests pass.
+
+PAYMENT AND DELIVERY NOTES
+- The checkout server recalculates prices; it does not trust browser-submitted totals.
+- Delivery fees are not included in checkout subtotal; the site says delivery fees are confirmed separately before dispatch.
+- Hair/wig estimates are 1–3 days; other products 1–2 days.
+- Services are appointment requests and are not charged online.
+- Do not paste passwords, API keys or private credentials into ChatGPT or commit them to GitHub.
