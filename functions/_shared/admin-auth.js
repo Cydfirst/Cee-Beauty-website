@@ -26,3 +26,4 @@ export async function isAdmin(request, env) {
   try { const data=JSON.parse(new TextDecoder().decode(unb64(payload))); return data.role==='admin' && data.exp>Date.now(); } catch { return false; }
 }
 export const json = (data,status=200,headers={}) => new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json','cache-control':'no-store',...headers}});
+
